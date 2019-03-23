@@ -19,5 +19,21 @@ server.get('/api/actions/', async (req, res) => {
     }
 });
 
+server.post('/api/projects/', async (req, res) => {
+    const newAction = req.body;
+    try {
+
+        const action = await actionsDb.insert(newAction)
+        if (action) {
+            res.status(200).json(action)
+        }
+        else {
+            res.status(404).json('All fields are required')
+        }
+    }
+    catch (e) {
+        res.status(500).json(e)
+    }
+})
 
 module.exports = server;
