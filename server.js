@@ -19,7 +19,7 @@ server.get('/api/actions/', async (req, res) => {
     }
 });
 
-server.post('/api/projects/', async (req, res) => {
+server.post('/api/actions/', async (req, res) => {
     const newAction = req.body;
     try {
 
@@ -28,6 +28,7 @@ server.post('/api/projects/', async (req, res) => {
             res.status(200).json(action)
         }
         else {
+            console.log('error')
             res.status(404).json('All fields are required')
         }
     }
