@@ -1,6 +1,7 @@
 
 exports.up = function(knex, Promise) {
-    return knex.schema.createTable('projects', table => {
+    return knex.schema
+    .createTable('projects', table => {
         table.increments();
         table.text('name').notNullable();
         table.text('description').notNullable();
