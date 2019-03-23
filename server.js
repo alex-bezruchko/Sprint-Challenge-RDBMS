@@ -19,6 +19,22 @@ server.get('/api/actions/', async (req, res) => {
     }
 });
 
+server.get('/api/actions/:id', async (req, res) => {
+    const id = req.params.id;
+    try {
+        const action = await actionsDb.getActionsById(id)
+        if (action) {
+            res.status(200).json(action)
+        }
+        else {
+            res.status(404).json('This id is not available')
+        }
+    }
+    catch (e) {
+        res.status(500).json(e)
+    }
+});
+
 server.post('/api/actions/', async (req, res) => {
     const newAction = req.body;
     try {
