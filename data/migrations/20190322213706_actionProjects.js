@@ -8,7 +8,12 @@ exports.up = function(knex, Promise) {
             .inTable('actions')
             .onDelete('CASCADE')
             .onUpdate('CASCADE')
-       
+       table
+            .integer('project_id')
+            .references('id')
+            .inTable('projects')
+            .onDelete('CASCADE')
+            .onUpdate('CASCADE')
     })
 };
 

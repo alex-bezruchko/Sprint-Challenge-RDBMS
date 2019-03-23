@@ -10,10 +10,13 @@ function getAllProjects() {
     return db('projects')
 }
 function getProjectsById(id) {
-    return db('projects').where({id}).first();
+    // knex.select('*').from('users').join('accounts', {'accounts.id': 'users.account_id'})
+
+    return db('projects').from('projects').join('actions', {'projects.id': 'actions.project_id'}).select('*')
+    // return db('projects').where({id}).first();
 }
 
-function insert(action) {
+function insert(project) {
     return db('projects').insert(project).then(ids => {
         return getProjectsById(ids[0])
     })

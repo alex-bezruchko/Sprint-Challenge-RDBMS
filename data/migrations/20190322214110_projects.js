@@ -2,15 +2,10 @@
 exports.up = function(knex, Promise) {
     return knex.schema.createTable('projects', table => {
         table.increments();
-        table.text('project_name')
-        table.text('project_description')
+        table.text('name').notNullable();
+        table.text('description').notNullable();
         table.boolean('completed')
-        table
-            .integer('actionProjectsId ')
-            .references('id')
-            .inTable('actionProjects')
-            .onDelete('CASCADE')
-            .onUpdate('CASCADE')
+        
     })
 };
 

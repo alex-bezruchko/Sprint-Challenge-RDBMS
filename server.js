@@ -5,6 +5,39 @@ const projectsDb = require('./data/helpers/projectsDb');
 server.use(express.json());
 
 
+server.post('/api/projects/', async (req, res) => {
+    const newproject = req.body;
+    try {
+
+        const project = await projectsDb.insert(newproject)
+        if (project) {
+            res.status(200).json(project)
+        }
+        else {
+            console.log('error')
+            res.status(404).json('All fields are required')
+        }
+    }
+    catch (e) {
+        res.status(500).json(e)
+    }
+})
+
+server.get('/api/projects/:id', async (req, res) => {
+    const id = req.params.id;
+    try {
+        const action = await projectsDb.getProjectsById(id)
+        if (action) {
+            res.status(200).json(action)
+        }
+        else {
+            res.status(404).json('This id is not available')
+        }
+    }
+    catch (e) {
+        res.status(500).json(e)
+    }
+});
 
 
 server.get('/api/actions/', async (req, res) => {
